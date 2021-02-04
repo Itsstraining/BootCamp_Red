@@ -1,33 +1,29 @@
-<!-- <div style="border:solid white;width: 99vw;height: 40vw;background-color: rgba(0,136,148,255);">
-    <table class="Nen" style="width: 99vw;height: 500px;margin-top: 6vw;"
-        background="../../../assets/background-night.png">
-        <tr>
-            <td>
-                <p><b >
-                        <img class="Title" src="../../../assets/flappy-bird.png" width="350px">
-                    </b></p>
-                <div>
-
-                </div>
-                <canvas class="Canvas" ></canvas>  
-            </td>
-        </tr>
-    </table>
-</div> -->
-
 <div class="background" style="overflow: hidden;">
-    <div class="back">
-        <img class="Title" src="../../../assets/flappy-bird.png" width="350px" style="margin-top: 10%;">
-        <div class="Character" >
-            <div [@animImageSlider]="counter">
-                <ng-container *ngFor="let img of images; let i=index">
-                    <img [src]="img" style="margin-left: 25%;margin-top: 5%;" *ngIf="i===counter" />
-                </ng-container>
-            </div>
-            <button class="button" type="button" (click)="onPrevious()" [disabled]="counter===0">Previous</button>
-            <button class="button" type="button" (click)="onNext()" [disabled]="this.counter == this.images.length - 1">Next</button>
-            <button routerLink="game" class="playbutton" style="background-color:rgba(0,136,148,25);margin-left: 5%;"> <img src="../../../assets/play button.png" style="height: 60px; width: 60px; " > </button>
-        </div>
+  <!-- <div class="back">
+       <img class="Title" src="../../../assets/flappy-bird.png" width="350px" style="margin-top: 10%;">
+       <div class="Character" >
+           <div [@animImageSlider]="counter">
+               <ng-container *ngFor="let img of images; let i=index">
+                   <img [src]="img" style="margin-left: 25%;margin-top: 5%;" *ngIf="i===counter" />
+               </ng-container>
+           </div>
+       </div>
+   </div> -->
+  <div class="back">
+    <img class="Title" src="../../../assets/flappy-bird.png" width="350px">
+    <div class="Character">
+      <img src="../../../assets/blue.gif" style="margin-left: 25%;margin-top: 5%;">
+      <img src="../../../assets/yellowbird-upflap.gif" style="margin-left: 25%;margin-top: 5%;">
+      <img src="../../../assets/red.gif" style="margin-left: 25%;margin-top: 5%;">
     </div>
-    <div class="base"></div>
+  </div>
+  <div class="base"></div>
 </div>
+<!-- <mat-grid-list cols="1" rowHeight="46px" >
+   <mat-grid-tile rowspan="11" class="background">
+       <div class="back">
+       <img class="Title" src="../../../assets/flappy-bird.png" width="350px">
+       </div>
+   </mat-grid-tile>
+   <mat-grid-tile class="base" rowspan="2"></mat-grid-tile>
+</mat-grid-list> -->
