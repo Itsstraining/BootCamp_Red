@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import * as firebase from 'firebase';
-import { isBuffer } from 'util';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -9,7 +9,7 @@ import { isBuffer } from 'util';
 })
 
 export class NavbarComponent implements OnInit,OnDestroy {
-  constructor(private auth:AngularFireAuth){}
+  constructor(private auth:AngularFireAuth,  private router:Router){}
   ngOnDestroy(): void {
     this.user=null;
   }
@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit,OnDestroy {
       const provider = new firebase.default.auth.GoogleAuthProvider();
       try{
         await this.auth.signInWithPopup(provider);
+        this.router.navigate(['main']);
       }catch(err){
         alert("failed");
       }
