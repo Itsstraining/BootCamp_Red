@@ -1,6 +1,6 @@
-  <div class="background">
+  <div class="background" style="overflow: hidden;">
     <div class="back">
-        <img class="Title" src="../../../assets/flappy-bird.png" width="350px" style="margin-top: 3%;">
+        <img class="Title" src="../../../assets/flappy-bird.png" width="350px" style="margin-top: 10%;">
         <div class="Character" >
             <div [@animImageSlider]="counter">
                 <ng-container *ngFor="let img of images; let i=index">
@@ -9,5 +9,5 @@
             </div>
         </div>
     </div>
-
+    <div class="base"></div>
 </div>
