@@ -12,12 +12,10 @@ import { AngularFireModule, FirebaseApp } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {MatButtonModule} from '@angular/material/button';
-import { FooterComponent } from './pages/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent,
   ],
   imports: [
     BrowserModule,
