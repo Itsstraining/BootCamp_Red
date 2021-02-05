@@ -17,6 +17,22 @@ export class DataService {
     this.users = this.fire.collection('user').valueChanges();
   }
 
+  public chooseBird: any
+
+  images = [
+    '../../../assets/yellowbird-upflap.gif',
+    '../../../assets/blue.gif',
+    '../../../assets/red.gif',
+    '../../../assets/pink.gif',
+    '../../../assets/robot.gif',
+    '../../../assets/3mau.gif'
+
+  ];
+
+  public getBird(x){
+    return this.chooseBird = this.images[x]
+  }
+
   getUsers(){
     return this.users;
   }

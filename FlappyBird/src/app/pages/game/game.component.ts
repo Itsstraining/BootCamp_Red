@@ -9,9 +9,12 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit, AfterViewInit {
+
   constructor(public fire: AngularFirestore, public data: DataService, public itemSer: DataService, private auth: AngularFireAuth) { }
+  
   users: User[];
   public userName: firebase.default.UserInfo;
+  
   ngOnInit(): void {
     this.itemSer.getUsers().subscribe(users => {
       this.users = users;
@@ -23,8 +26,10 @@ export class GameComponent implements OnInit, AfterViewInit {
       }
     })
   }
+  
   ngAfterViewInit(): void {
   }
+  
   @ViewChild('myCanvas')
   public myCanvas: ElementRef<HTMLCanvasElement>;
   public context: CanvasRenderingContext2D;
@@ -48,7 +53,7 @@ export class GameComponent implements OnInit, AfterViewInit {
     fly.src = "../../assets/fly.mp3";
     scoreSound.src = "../../assets/score.mp3"
     bg.src = "../../assets/background-night.png";
-    bird.src = "../../assets/pink.gif";
+    bird.src = "../../assets/yellow.gif";
     pipeSouth.src = "../../assets/pipe-green-north.png";
     pipeNorth.src = "../../assets/pipe-green-south.png";
     fg.src = "../../assets/base.png";
