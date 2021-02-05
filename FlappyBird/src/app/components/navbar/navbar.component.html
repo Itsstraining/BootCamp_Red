@@ -6,10 +6,10 @@
     </span>
     <span class="example-spacer"></span>
   <div class="example-button-row">
-    <button mat-raised-button color="primary" routerLink="score">History</button>
+    <button *ngIf="this.user" mat-raised-button color="primary" routerLink="score">History</button>
     <button  *ngIf="!this.user" (click)="logIn()" mat-raised-button color="primary">Sign In</button>
     <button *ngIf="!this.user" onclick="document.getElementById('id01').style.display='block' " mat-raised-button
-      color="primary">Register</button>
+      color="primary">Sign Up</button>
     <div id="id01" class="modal">
       <form class="modal-content animate" action="/action_page.php" method="post">
         <div class="imgcontainer">

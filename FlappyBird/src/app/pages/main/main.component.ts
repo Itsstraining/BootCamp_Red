@@ -16,7 +16,7 @@ export class MainComponent implements OnInit {
 
   counter: number = 0;
   // images = [
-  //   '../../../assets/yellowbird-upflap.gif',
+  //   '../../../assets/yellow.gif',
   //   '../../../assets/blue.gif',
   //   '../../../assets/red.gif',
   //   '../../../assets/pink.gif',

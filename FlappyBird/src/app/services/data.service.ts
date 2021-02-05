@@ -20,7 +20,7 @@ export class DataService {
   public chooseBird: any
 
   images = [
-    '../../../assets/yellowbird-upflap.gif',
+    '../../../assets/yellow.gif',
     '../../../assets/blue.gif',
     '../../../assets/red.gif',
     '../../../assets/pink.gif',
