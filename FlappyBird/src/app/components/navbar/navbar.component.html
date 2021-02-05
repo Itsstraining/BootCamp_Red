@@ -1,10 +1,11 @@
   <mat-toolbar >
     <span>
-      <h1>Flappy Bird</h1>
+      <img *ngIf="!this.user" routerLink="" src="../../../assets/flappy-bird.png" style="height: 35px;">
+      <img *ngIf="this.user" routerLink="main" src="../../../assets/flappy-bird.png" style="height: 35px;">
     </span>
     <span class="example-spacer"></span>
   <div class="example-button-row">
-    <button *ngIf="!this.user" (click)="logIn()" mat-raised-button color="primary">Sign In</button>
+    <button  *ngIf="!this.user" (click)="logIn()" mat-raised-button color="primary">Sign In</button>
     <button *ngIf="!this.user" onclick="document.getElementById('id01').style.display='block' " mat-raised-button
       color="primary">Register</button>
     <div id="id01" class="modal">
@@ -46,5 +47,5 @@
     </script>
     <button *ngIf="this.user" (click)="logOut()" mat-raised-button color="primary">Sign Out</button>
   </div>
-  <img *ngIf="this.user" style="width: 50px;border-radius: 50%;" [src]="user.photoURL">
+  <img *ngIf="this.user" routerLink="game" style="width: 50px;border-radius: 50%;" [src]="user.photoURL">
 </mat-toolbar>
