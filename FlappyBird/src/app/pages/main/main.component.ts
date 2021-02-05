@@ -14,14 +14,12 @@ let choose;
 export class MainComponent implements OnInit {
   counter: number = 0;
   images = [
-
     '../../../assets/yellowbird-upflap.gif',
     '../../../assets/blue.gif',
     // '../../../assets/red.gif',
     // '../../../assets/pink.gif',
     // '../../../assets/robot.gif',
     // '../../../assets/3mau.gif'
-
   ];
   @Output() public choose:EventEmitter<any>=new EventEmitter();
 

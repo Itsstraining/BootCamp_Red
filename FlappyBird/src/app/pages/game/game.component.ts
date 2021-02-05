@@ -1,11 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
-<<<<<<< HEAD
-
-
-=======
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
 import { DataService } from 'src/app/services/data.service';
->>>>>>> f85caa9cd4c46406c2b55d6bfc2baf879d0eb63f
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -27,8 +22,8 @@ user:firebase.default.UserInfo;
   public myCanvas: ElementRef<HTMLCanvasElement>;
   public context: CanvasRenderingContext2D;
   ngAfterViewInit(): void {
-    // this.game(this.fire);
-    alert(this.user.displayName)
+    this.game(this.fire);
+    // alert(this.user.displayName)
   }
   public game(fire) {
     //set img and sound
@@ -52,9 +47,8 @@ user:firebase.default.UserInfo;
     scoreSound.src = "../../assets/score.mp3"
     bg.src = "../../assets/background-night.png";
 
-
-    bird.src = "../../assets/red.gif";
-
+    // bird.src = "../../assets/red.gif";
+    bird.src = "../../assets/pink.gif";
 
     pipeSouth.src = "../../assets/pipe-green-north.png";
     pipeNorth.src = "../../assets/pipe-green-south.png";
@@ -171,7 +165,7 @@ user:firebase.default.UserInfo;
           // drawGameover();
           // setTimeout(loop, 1000);
           createScore(score);
-          
+
         } else {
           draw();
           setTimeout(loop, 60);
@@ -188,10 +182,4 @@ user:firebase.default.UserInfo;
       fire.collection('score').add(Record);
     }
   }
-
-
-
- 
 }
-
-
