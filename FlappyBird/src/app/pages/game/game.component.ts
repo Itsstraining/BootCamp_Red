@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
+<<<<<<< HEAD
 
 
+=======
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
+import { DataService } from 'src/app/services/data.service';
+>>>>>>> f85caa9cd4c46406c2b55d6bfc2baf879d0eb63f
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -9,18 +14,23 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '
 export class GameComponent implements OnInit, AfterViewInit {
 @Input() public chooseBird;
 
-  constructor() { }
+  constructor(public fire: AngularFirestore,public data:DataService) { }
 
   ngOnInit(): void {
   }
+
+@Input()
+user:firebase.default.UserInfo;
+
   //get canvas
   @ViewChild('myCanvas')
   public myCanvas: ElementRef<HTMLCanvasElement>;
   public context: CanvasRenderingContext2D;
   ngAfterViewInit(): void {
-    this.game();
+    // this.game(this.fire);
+    alert(this.user.displayName)
   }
-  public game() {
+  public game(fire) {
     //set img and sound
     let bird = new Image();
     let bg = new Image();
@@ -35,7 +45,7 @@ export class GameComponent implements OnInit, AfterViewInit {
     let scoreSound = new Audio();
 
     //set src
-    die.src  = "../../assets/sfx_hit.mp3"
+    die.src = "../../assets/sfx_hit.mp3"
     gameover.src = "../../assets/gameover.png";
     restart.src = "../../assets/restart_1.png"
     fly.src = "../../assets/fly.mp3";
@@ -158,8 +168,10 @@ export class GameComponent implements OnInit, AfterViewInit {
 
       } else {
         if (state == 1) {
-          drawGameover();
-          setTimeout(loop, 1000);
+          // drawGameover();
+          // setTimeout(loop, 1000);
+          createScore(score);
+          
         } else {
           draw();
           setTimeout(loop, 60);
@@ -168,7 +180,18 @@ export class GameComponent implements OnInit, AfterViewInit {
     }
     //call  loop to loop the game
     loop();
+    //add to db
+    function createScore(score) {
+      alert(score);
+      let Record = {};
+      Record['score'] = score;
+      fire.collection('score').add(Record);
+    }
   }
+
+
+
+ 
 }
 
 

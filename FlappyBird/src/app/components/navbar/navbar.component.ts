@@ -11,6 +11,16 @@ import * as firebase from 'firebase';
 export class NavbarComponent implements OnInit,OnDestroy {
 
   constructor(private auth:AngularFireAuth,  private router:Router){}
+
+  public user:firebase.default.UserInfo;
+  ngOnInit(): void {
+    this.auth.authState.subscribe((user) => {
+      if (user) {
+        this.user = user
+      }
+    })
+  }
+
   ngOnDestroy(): void {
     this.user=null;
   }
@@ -33,13 +43,11 @@ export class NavbarComponent implements OnInit,OnDestroy {
       alert("Sigout failed");
     }
   }
-  public user:any;
-  ngOnInit(): void {
-    this.auth.authState.subscribe((user) => {
-      if (user) {
-        this.user = user
-      }
-    })
-  }
+  // public tranfer(){
+  //   this.user.displayName = x;
+
+  // }
+
+ 
 
 }

@@ -14,6 +14,9 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {MatButtonModule} from '@angular/material/button';
 import { FooterComponent } from './components/footer/footer.component';
 
+import {AngularFireDatabaseModule} from '@angular/fire/database'
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+
 
 import {MatGridListModule} from '@angular/material/grid-list';
 
@@ -34,7 +37,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatGridListModule
+    MatGridListModule,
+
+
+    AngularFireDatabaseModule,
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
