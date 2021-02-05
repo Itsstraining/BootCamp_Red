@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const Data = require("./database");
 const mongoose = require("mongoose");
 const BirdModel = require("./models/bird.model");
+const ScoreModel = require("./Schemas/Score.schema");
 // const fireBaseAdmin = require('firebase-admin');
 
 const connectionString =
@@ -38,10 +39,22 @@ app.post("/bird", async (req, res) => {
   }
 });
 
+//
+app.post("/score", (req, res) => {
+  let { name, score } = req.body;
+  const task1 = new Task({
+    name: name,
+    content: score,
+  });
+
+  db.createTask(task1);
+  res.send(`item ${name} was created`);
+});
+
 async function main() {
   try {
     let db = await Data.instance.connectDb(connectionString);
-    app.listen(8080, "192.168.31.209", () => {
+    app.listen(8080, () => {
       console.log("server is running !");
     });
   } catch (e) {

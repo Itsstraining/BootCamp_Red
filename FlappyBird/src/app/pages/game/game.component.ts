@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
+import { ALPN_ENABLED } from 'constants';
+import { User } from 'src/app/models/user.models';
 import { DataService } from 'src/app/services/data.service';
 @Component({
   selector: 'app-game',
@@ -7,25 +10,31 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit, AfterViewInit {
-@Input() public chooseBird;
 
-  constructor(public fire: AngularFirestore,public data:DataService) { }
-
+  constructor(public fire: AngularFirestore, public data: DataService, public itemSer: DataService,private auth: AngularFireAuth) { }
+  users: User[];
+  public userName: firebase.default.UserInfo;
   ngOnInit(): void {
+    this.itemSer.getUsers().subscribe(users => {
+      this.users = users;
+    })
+    this.auth.authState.subscribe((userName) => {
+      if (userName) {
+        this.userName = userName;
+        this.game(this.fire,userName.displayName);
+      }
+    })
+  }
+  ngAfterViewInit(): void {
   }
 
-@Input()
-user:firebase.default.UserInfo;
 
-  //get canvas
+
   @ViewChild('myCanvas')
   public myCanvas: ElementRef<HTMLCanvasElement>;
   public context: CanvasRenderingContext2D;
-  ngAfterViewInit(): void {
-    this.game(this.fire);
-    // alert(this.user.displayName)
-  }
-  public game(fire) {
+
+  public game(fire,userName) {
     //set img and sound
     let bird = new Image();
     let bg = new Image();
@@ -46,10 +55,7 @@ user:firebase.default.UserInfo;
     fly.src = "../../assets/fly.mp3";
     scoreSound.src = "../../assets/score.mp3"
     bg.src = "../../assets/background-night.png";
-
-    // bird.src = "../../assets/red.gif";
     bird.src = "../../assets/pink.gif";
-
     pipeSouth.src = "../../assets/pipe-green-north.png";
     pipeNorth.src = "../../assets/pipe-green-south.png";
     fg.src = "../../assets/base.png";
@@ -133,7 +139,6 @@ user:firebase.default.UserInfo;
       ctx.drawImage(fg, 0, 515 - fg.height);
       //bird go down by gravity;
       bY += gravity;
-
       //set score on screen.
       ctx.fillStyle = '#000';
       ctx.font = "20px Verdana";
@@ -172,14 +177,24 @@ user:firebase.default.UserInfo;
         }
       }
     }
+
     //call  loop to loop the game
     loop();
     //add to db
     function createScore(score) {
       alert(score);
       let Record = {};
-      Record['score'] = score;
-      fire.collection('score').add(Record);
+      if (score > 0) {
+        Record['score'] = score;
+        Record['name'] = userName;
+        fire.collection('score').add(Record);
+      }
     }
   }
+
+
+
+
 }
+
+

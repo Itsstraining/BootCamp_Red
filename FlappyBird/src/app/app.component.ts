@@ -4,13 +4,11 @@ import { Component, Input } from '@angular/core';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-
+  
 })
 export class AppComponent {
-  title = 'Flappy Bird';
-
-  public chooseBird;
-
+  title = 'Project';
+ 
   public userSignIn: any
 
   public signIn(user){
