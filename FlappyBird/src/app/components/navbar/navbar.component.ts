@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { asLiteral } from '@angular/compiler/src/render3/view/util';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
@@ -9,7 +10,18 @@ import * as firebase from 'firebase';
 })
 
 export class NavbarComponent implements OnInit,OnDestroy {
+
   constructor(private auth:AngularFireAuth,  private router:Router){}
+
+  public user:firebase.default.UserInfo;
+  ngOnInit(): void {
+    this.auth.authState.subscribe((user) => {
+      if (user) {
+        this.user = user
+      }
+    })
+  }
+
   ngOnDestroy(): void {
     this.user=null;
   }
@@ -27,17 +39,16 @@ export class NavbarComponent implements OnInit,OnDestroy {
     try{
       await this.auth.signOut();
       this.user=null;
+      this.router.navigate(['']);
     }catch(err){
       alert("Sigout failed");
     }
   }
-  public user:any;
-  ngOnInit(): void {
-    this.auth.authState.subscribe((user) => {
-      if (user) {
-        this.user = user
-      }
-    })
-  }
+  // public tranfer(){
+  //   this.user.displayName = x;
+
+  // }
+
+ 
 
 }

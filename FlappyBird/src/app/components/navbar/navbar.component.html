@@ -1,6 +1,7 @@
   <mat-toolbar >
     <span>
-      <img routerLink="" src="../../../assets/flappy-bird.png" style="height: 35px;">
+      <img *ngIf="!this.user" routerLink="" src="../../../assets/flappy-bird.png" style="height: 35px;">
+      <img *ngIf="this.user" routerLink="main" src="../../../assets/flappy-bird.png" style="height: 35px;">
     </span>
     <span class="example-spacer"></span>
   <div class="example-button-row">
@@ -47,4 +48,5 @@
     <button *ngIf="this.user" (click)="logOut()" mat-raised-button color="primary">Sign Out</button>
   </div>
   <img *ngIf="this.user" routerLink="game" style="width: 50px;border-radius: 50%;" [src]="user.photoURL">
+  <!-- <button (click)="clickTest()"></button> -->
 </mat-toolbar>

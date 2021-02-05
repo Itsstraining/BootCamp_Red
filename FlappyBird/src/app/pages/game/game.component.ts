@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
+import { DataService } from 'src/app/services/data.service';
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -7,39 +8,44 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angula
 })
 export class GameComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(public fire: AngularFirestore,public data:DataService) { }
 
   ngOnInit(): void {
   }
+
+@Input()
+user:firebase.default.UserInfo;
+
   //get canvas
   @ViewChild('myCanvas')
   public myCanvas: ElementRef<HTMLCanvasElement>;
   public context: CanvasRenderingContext2D;
   ngAfterViewInit(): void {
-    this.game();
+    // this.game(this.fire);
+    alert(this.user.displayName)
   }
-  public game() {
+  public game(fire) {
     //set img and sound
     let bird = new Image();
     let bg = new Image();
     let fg = new Image();
     let pipeNorth = new Image();
     let pipeSouth = new Image();
-    let fly = new Audio();
-    let scoreSound = new Audio();
     let start = new Image();
     let restart = new Image();
     let gameover = new Image();
     let die = new Audio();
+    let fly = new Audio();
+    let scoreSound = new Audio();
 
     //set src
-    die.src  = "../../assets/sfx_hit.mp3"
+    die.src = "../../assets/sfx_hit.mp3"
     gameover.src = "../../assets/gameover.png";
     restart.src = "../../assets/restart_1.png"
     fly.src = "../../assets/fly.mp3";
     scoreSound.src = "../../assets/score.mp3"
     bg.src = "../../assets/background-night.png";
-    bird.src = "../../assets/yellowbird-upflap.gif";
+    bird.src = "../../assets/pink.gif";
     pipeSouth.src = "../../assets/pipe-green-north.png";
     pipeNorth.src = "../../assets/pipe-green-south.png";
     fg.src = "../../assets/base.png";
@@ -152,8 +158,10 @@ export class GameComponent implements OnInit, AfterViewInit {
 
       } else {
         if (state == 1) {
-          drawGameover();
-          setTimeout(loop, 1000);
+          // drawGameover();
+          // setTimeout(loop, 1000);
+          createScore(score);
+          
         } else {
           draw();
           setTimeout(loop, 60);
@@ -162,7 +170,18 @@ export class GameComponent implements OnInit, AfterViewInit {
     }
     //call  loop to loop the game
     loop();
+    //add to db
+    function createScore(score) {
+      alert(score);
+      let Record = {};
+      Record['score'] = score;
+      fire.collection('score').add(Record);
+    }
   }
+
+
+
+ 
 }
 
 
