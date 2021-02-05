@@ -7,6 +7,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit, AfterViewInit {
+@Input() public chooseBird;
 
   constructor(public fire: AngularFirestore,public data:DataService) { }
 
@@ -21,8 +22,8 @@ user:firebase.default.UserInfo;
   public myCanvas: ElementRef<HTMLCanvasElement>;
   public context: CanvasRenderingContext2D;
   ngAfterViewInit(): void {
-    // this.game(this.fire);
-    alert(this.user.displayName)
+    this.game(this.fire);
+    // alert(this.user.displayName)
   }
   public game(fire) {
     //set img and sound
@@ -45,7 +46,10 @@ user:firebase.default.UserInfo;
     fly.src = "../../assets/fly.mp3";
     scoreSound.src = "../../assets/score.mp3"
     bg.src = "../../assets/background-night.png";
+
+    // bird.src = "../../assets/red.gif";
     bird.src = "../../assets/pink.gif";
+
     pipeSouth.src = "../../assets/pipe-green-north.png";
     pipeNorth.src = "../../assets/pipe-green-south.png";
     fg.src = "../../assets/base.png";
@@ -161,7 +165,7 @@ user:firebase.default.UserInfo;
           // drawGameover();
           // setTimeout(loop, 1000);
           createScore(score);
-          
+
         } else {
           draw();
           setTimeout(loop, 60);
@@ -178,10 +182,4 @@ user:firebase.default.UserInfo;
       fire.collection('score').add(Record);
     }
   }
-
-
-
- 
 }
-
-

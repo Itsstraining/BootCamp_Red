@@ -43,11 +43,5 @@ export class NavbarComponent implements OnInit,OnDestroy {
       alert("Sigout failed");
     }
   }
-  // public tranfer(){
-  //   this.user.displayName = x;
-
-  // }
-
- 
 
 }
