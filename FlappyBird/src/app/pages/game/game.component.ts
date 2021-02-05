@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
-import { ALPN_ENABLED } from 'constants';
 import { User } from 'src/app/models/user.models';
 import { DataService } from 'src/app/services/data.service';
 @Component({
@@ -10,8 +9,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit, AfterViewInit {
-
-  constructor(public fire: AngularFirestore, public data: DataService, public itemSer: DataService,private auth: AngularFireAuth) { }
+  constructor(public fire: AngularFirestore, public data: DataService, public itemSer: DataService, private auth: AngularFireAuth) { }
   users: User[];
   public userName: firebase.default.UserInfo;
   ngOnInit(): void {
@@ -21,20 +19,16 @@ export class GameComponent implements OnInit, AfterViewInit {
     this.auth.authState.subscribe((userName) => {
       if (userName) {
         this.userName = userName;
-        this.game(this.fire,userName.displayName);
+        this.game(this.fire, userName.displayName);
       }
     })
   }
   ngAfterViewInit(): void {
   }
-
-
-
   @ViewChild('myCanvas')
   public myCanvas: ElementRef<HTMLCanvasElement>;
   public context: CanvasRenderingContext2D;
-
-  public game(fire,userName) {
+  public game(fire, userName) {
     //set img and sound
     let bird = new Image();
     let bg = new Image();
@@ -47,7 +41,6 @@ export class GameComponent implements OnInit, AfterViewInit {
     let die = new Audio();
     let fly = new Audio();
     let scoreSound = new Audio();
-
     //set src
     die.src = "../../assets/sfx_hit.mp3"
     gameover.src = "../../assets/gameover.png";
@@ -70,7 +63,6 @@ export class GameComponent implements OnInit, AfterViewInit {
     let bY = 150;
     let gravity = 8;
     let constant = 320 + gap;
-
     let width = 1500;
     // pipe coordinates
     let pipe = [];
@@ -84,7 +76,6 @@ export class GameComponent implements OnInit, AfterViewInit {
       bY -= 50;
       fly.play();
     }
-
     //0 true
     //1 false
     let state = 0;
@@ -167,10 +158,11 @@ export class GameComponent implements OnInit, AfterViewInit {
 
       } else {
         if (state == 1) {
-          // drawGameover();
+          for(let i = 0;i<20;i++){
+            drawGameover();
+          }
           // setTimeout(loop, 1000);
           createScore(score);
-
         } else {
           draw();
           setTimeout(loop, 60);
@@ -182,7 +174,6 @@ export class GameComponent implements OnInit, AfterViewInit {
     loop();
     //add to db
     function createScore(score) {
-      alert(score);
       let Record = {};
       if (score > 0) {
         Record['score'] = score;
