@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  endpoint:"http://192.168.31.209:8080/",
   firebase:{
     // apiKey: "AIzaSyA7sAGHfLndtO_CeFPbAXuGx6pQfcT_wm8",
     // authDomain: "project-hk3.firebaseapp.com",
