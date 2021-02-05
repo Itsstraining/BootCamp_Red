@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { MainComponent } from '../main/main.component';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-game',
@@ -7,6 +7,7 @@ import { MainComponent } from '../main/main.component';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit, AfterViewInit {
+@Input() public chooseBird;
 
   constructor() { }
 
