@@ -12,12 +12,17 @@ import { AngularFireModule, FirebaseApp } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {MatButtonModule} from '@angular/material/button';
-import { FooterComponent } from './pages/footer/footer.component';
+import { FooterComponent } from './components/footer/footer.component';
+
+
+import {MatGridListModule} from '@angular/material/grid-list';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,8 @@ import { FooterComponent } from './pages/footer/footer.component';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

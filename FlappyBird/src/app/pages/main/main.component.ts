@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger} from '@angular/animations';
-import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
+import { Router } from '@angular/router';
+
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.scss'],
   animations: [
     trigger('animImageSlider', [
     ]),
   ]
 })
-export class HomeComponent implements OnInit {
+export class MainComponent implements OnInit {
+
   counter: number = 0;
   images = [
     '../../../assets/yellowbird-upflap.gif',
@@ -23,20 +25,23 @@ export class HomeComponent implements OnInit {
   ];
 
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
-    onNext() {
-      if (this.counter != this.images.length - 1) {
-        this.counter++;
-      }
+  onNext() {
+    if (this.counter != this.images.length - 1) {
+      this.counter++;
     }
+  }
 
-    onPrevious() {
-      if (this.counter > 0) {
-        this.counter--;
-      }
+  onPrevious() {
+    if (this.counter > 0) {
+      this.counter--;
     }
+  }
 
+  onNavigate(url){
+    this.router.navigate([url])
+  }
 }
