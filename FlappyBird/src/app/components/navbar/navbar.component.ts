@@ -1,5 +1,8 @@
 import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore'
+
+
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 @Component({
@@ -8,40 +11,59 @@ import * as firebase from 'firebase';
   styleUrls: ['./navbar.component.scss']
 })
 
-export class NavbarComponent implements OnInit,OnDestroy {
+export class NavbarComponent implements OnInit, OnDestroy {
 
-  constructor(private auth:AngularFireAuth,  private router:Router){}
+  constructor(private auth: AngularFireAuth, private router: Router, public fire: AngularFirestore) { }
 
-  public user:firebase.default.UserInfo;
+  public user: firebase.default.UserInfo;
   ngOnInit(): void {
     this.auth.authState.subscribe((user) => {
       if (user) {
-        this.user = user
+        this.user = user;
       }
     })
+
   }
 
   ngOnDestroy(): void {
-    this.user=null;
+    this.user = null;
   }
- async logIn(){
-      const provider = new firebase.default.auth.GoogleAuthProvider();
-      try{
-        await this.auth.signInWithPopup(provider);
-        this.router.navigate(['main']);
-      }catch(err){
-        alert("failed");
-      }
+  async logIn() {
+    const provider = new firebase.default.auth.GoogleAuthProvider();
+    // this.tranferName();
+    try {
+      await this.auth.signInWithPopup(provider);
 
+      this.router.navigate(['main']);
+      // this.tranferName();
+    } catch (err) {
+      alert("failed");
     }
-  async logOut(){
-    try{
+
+  }
+  async logOut() {
+    try {
       await this.auth.signOut();
-      this.user=null;
+      this.user = null;
       this.router.navigate(['']);
-    }catch(err){
+    } catch (err) {
       alert("Sigout failed");
     }
   }
+  public tranferName() {
+    // alert(score);
+    let userName = this.user.displayName;
+    let Record = {};
+    Record['name'] = userName;
+    this.fire.collection('user').add(Record);
+    alert(userName);
+  }
+
+  // public tranfer(){
+  //   alert(this.user.displayName);
+  //   return this.user.displayName;
+  // }
+
+
 
 }
