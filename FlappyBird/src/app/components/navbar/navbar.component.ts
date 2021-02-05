@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { asLiteral } from '@angular/compiler/src/render3/view/util';
-=======
->>>>>>> 3e09b05ab36a49652061589d515713f7495e2e18
 import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { Router } from '@angular/router';
